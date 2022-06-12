@@ -143,7 +143,7 @@ function updatePlayer(player)
 function gameloop() {
    postMessage({
       elapsedTime: totalTime + Date.now() - lastInitTime
-   }, "https://dan-subic.github.io:80");
+   }, "https://dan-subic.github.io");
    var player = $("#player");
 
    //update the player speed/position
