@@ -33,6 +33,7 @@ var soundDie = new buzz.sound("assets/sounds/sfx_die.ogg");
 var soundSwoosh = new buzz.sound("assets/sounds/sfx_swooshing.ogg");
 var totalTime = 0;
 var lastInitTime = Date.now();
+var totalAttempts = 0;
 buzz.all().setVolume(volume);
 
 //loops
@@ -53,6 +54,14 @@ $(document).ready(function() {
    //start with the splash screen
    showSplash();
 });
+
+function sendGameData() {
+   window.parent.postMessage({
+      elapsedTime: totalTime + Date.now() - lastInitTime,
+      totalAttempts,
+      highscore
+   }, "https://qualtrics.flinders.edu.au");
+}
 
 function getCookie(cname)
 {
@@ -107,6 +116,7 @@ function startGame()
 {
    lastInitTime = Date.now();
    currentstate = states.GameScreen;
+   totalAttempts += 1;
 
    //fade out the splash
    $("#splash").stop();
@@ -141,12 +151,7 @@ function updatePlayer(player)
 }
 
 function gameloop() {
-   if (window.parent) {
-      window.parent.postMessage({
-         elapsedTime: totalTime + Date.now() - lastInitTime
-      }, "https://qualtrics.flinders.edu.au");
-   }
-   
+   sendGameData();
    var player = $("#player");
 
    //update the player speed/position
@@ -374,6 +379,8 @@ function playerDead()
          });
       });
    }
+
+   sendGameData();
 }
 
 function showScore()
