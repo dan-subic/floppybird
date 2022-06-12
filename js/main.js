@@ -44,9 +44,9 @@ $(document).ready(function() {
       pipeheight = 200;
 
    //get the highscore
-   var savedscore = getCookie("highscore");
+   /*var savedscore = getCookie("highscore");
    if(savedscore != "")
-      highscore = parseInt(savedscore);
+      highscore = parseInt(savedscore);*/
 
    //start with the splash screen
    showSplash();
