@@ -31,6 +31,8 @@ var soundScore = new buzz.sound("assets/sounds/sfx_point.ogg");
 var soundHit = new buzz.sound("assets/sounds/sfx_hit.ogg");
 var soundDie = new buzz.sound("assets/sounds/sfx_die.ogg");
 var soundSwoosh = new buzz.sound("assets/sounds/sfx_swooshing.ogg");
+var totalTime = 0;
+var lastInitTime = Date.now();
 buzz.all().setVolume(volume);
 
 //loops
@@ -103,6 +105,7 @@ function showSplash()
 
 function startGame()
 {
+   lastInitTime = Date.now();
    currentstate = states.GameScreen;
 
    //fade out the splash
@@ -138,6 +141,9 @@ function updatePlayer(player)
 }
 
 function gameloop() {
+   postMessage({
+      elapsedTime: totalTime + Date.now() - lastInitTime
+   }, "https://qualtrics.flinders.edu.au:80");
    var player = $("#player");
 
    //update the player speed/position
@@ -330,6 +336,7 @@ function setMedal()
 
 function playerDead()
 {
+   totalTime += Date.now() - lastInitTime;
    //stop animating everything!
    $(".animated").css('animation-play-state', 'paused');
    $(".animated").css('-webkit-animation-play-state', 'paused');
