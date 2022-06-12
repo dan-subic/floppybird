@@ -379,8 +379,6 @@ function playerDead()
          });
       });
    }
-
-   sendGameData();
 }
 
 function showScore()
@@ -399,6 +397,7 @@ function showScore()
       //save it!
       setCookie("highscore", highscore, 999);
    }
+   sendGameData();
 
    //update the scoreboard
    setSmallScore();
