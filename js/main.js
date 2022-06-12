@@ -143,7 +143,7 @@ function updatePlayer(player)
 function gameloop() {
    postMessage({
       elapsedTime: totalTime + Date.now() - lastInitTime
-   }, "https://qualtrics.flinders.edu.au:80");
+   }, "https://dan-subic.github.io:80");
    var player = $("#player");
 
    //update the player speed/position
