@@ -58,8 +58,8 @@ $(document).ready(function() {
 function sendGameData() {
    window.parent.postMessage({
       elapsedTime: totalTime + Date.now() - lastInitTime,
-      totalAttempts,
-      highscore
+      totalAttempts: totalAttempts,
+      highscore: highscore
    }, "https://qualtrics.flinders.edu.au");
 }
 
