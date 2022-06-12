@@ -55,9 +55,9 @@ $(document).ready(function() {
    showSplash();
 });
 
-function sendGameData() {
+function sendGameData(elapsedTime) {
    window.parent.postMessage({
-      elapsedTime: totalTime + Date.now() - lastInitTime,
+      elapsedTime: elapsedTime,
       totalAttempts: totalAttempts,
       highscore: highscore
    }, "https://qualtrics.flinders.edu.au");
@@ -151,7 +151,7 @@ function updatePlayer(player)
 }
 
 function gameloop() {
-   sendGameData();
+   sendGameData(totalTime + Date.now() - lastInitTime);
    var player = $("#player");
 
    //update the player speed/position
@@ -397,7 +397,7 @@ function showScore()
       //save it!
       setCookie("highscore", highscore, 999);
    }
-   sendGameData();
+   sendGameData(totalTime);
 
    //update the scoreboard
    setSmallScore();
