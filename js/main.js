@@ -381,6 +381,16 @@ function playerDead()
    }
 }
 
+function updateHighscore() {
+   if(score > highscore)
+   {
+      //yeah!
+      highscore = score;
+      //save it!
+      setCookie("highscore", highscore, 999);
+   }
+}
+
 function showScore()
 {
    //unhide us
@@ -390,13 +400,7 @@ function showScore()
    setBigScore(true);
 
    //have they beaten their high score?
-   if(score > highscore)
-   {
-      //yeah!
-      highscore = score;
-      //save it!
-      setCookie("highscore", highscore, 999);
-   }
+   updateHighscore();
    sendGameData(totalTime);
 
    //update the scoreboard
@@ -456,6 +460,7 @@ function playerScore()
    soundScore.stop();
    soundScore.play();
    setBigScore();
+   updateHighscore();
 }
 
 function updatePipes()
